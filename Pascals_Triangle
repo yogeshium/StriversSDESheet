@@ -1,0 +1,37 @@
+//Approach : 
+/*
+  My approach here is to first make a 2D array named result' and then push an array containing {1}.
+
+Now, I will traverse through the last array pushed into the result. While traversing this, 
+I will make a temporary array and push inside it the sum of two adjacent elements of this last array.
+And at the edge of this temporary array, I will simply put 1 and 1. Now, I will push this array to
+result and repeat this process for a given number of rows.
+*/
+
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) 
+    {
+        vector<vector<int>> res;
+        res.push_back({1});
+        int first = 0, last=0;
+        for(int i=1;i<numRows;i++)
+        {
+            vector<int> temp;
+            for(int j=0;j<res.back().size();j++)
+            {
+                if(j==0)
+                    temp.push_back(res.back()[0]);
+                else
+                    temp.push_back(res.back()[j]+res.back()[j-1]);
+            }
+            temp.push_back(res.back().back());
+            res.push_back(temp);
+        }    
+
+        return res;
+    }
+};
+
+
+
